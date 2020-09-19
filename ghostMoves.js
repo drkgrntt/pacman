@@ -12,6 +12,20 @@ export const randomMovement = (position, direction, objectExist) => {
     objectExist(nextMovePos, OBJECT_TYPE.WALL) ||
     objectExist(nextMovePos, OBJECT_TYPE.GHOST)
   ) {
+    // Check to see if the ghost can actually move
+    const canMove = keys.some((key) => {
+      const direction = DIRECTIONS[key]
+      return (
+        objectExist(position + direction.movement, OBJECT_TYPE.WALL) ||
+        objectExist(position + direction.movement, OBJECT_TYPE.GHOST)
+      )
+    })
+
+    if (!canMove) {
+      nextMovePos = position
+      break
+    }
+
     // Get a random key from the key array
     const key = keys[Math.floor(Math.random() * keys.length)]
     // Set the next move

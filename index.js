@@ -37,8 +37,8 @@ function checkCollision(pacman, ghosts) {
   const collidedGhost = ghosts.find((ghost) => pacman.pos === ghost.pos)
 
   if (collidedGhost) {
-    if (pacman.powerPillActive) {
-      gameBoard.removeObject(gollidedGhost.pos, [
+    if (pacman.powerPill) {
+      gameBoard.removeObject(collidedGhost.pos, [
         OBJECT_TYPE.GHOST,
         OBJECT_TYPE.SCARED,
         collidedGhost.name,
@@ -59,6 +59,42 @@ function gameLoop(pacman, ghosts) {
 
   ghosts.forEach((ghost) => gameBoard.moveCharacter(ghost))
   checkCollision(pacman, ghosts)
+
+  // Check if pacman eats a dot
+  if (gameBoard.objectExist(pacman.pos, OBJECT_TYPE.DOT)) {
+    gameBoard.removeObject(pacman.pos, [OBJECT_TYPE.DOT])
+    gameBoard.dotCount--
+    score += 10
+  }
+
+  // Check if pacman eats a powerpill
+  if (gameBoard.objectExist(pacman.pos, OBJECT_TYPE.PILL)) {
+    gameBoard.removeObject(pacman.pos, [OBJECT_TYPE.PILL])
+
+    pacman.powerPill = true
+    score += 50
+
+    clearTimeout(powerPillTimer)
+    powerPillTimer = setTimeout(
+      () => (pacman.powerPill = false),
+      POWER_PILL_TIME
+    )
+  }
+
+  // Change ghost to scare mode depending on powerpill
+  if (pacman.powerPill !== powerPillActive) {
+    powerPillActive = pacman.powerPill
+    ghosts.forEach((ghost) => (ghost.isScared = pacman.powerPill))
+  }
+
+  // Check if all dots have been eaten
+  if (gameBoard.dotCount === 0) {
+    gameWin = true
+    gameOver(pacman, ghosts)
+  }
+
+  // Show the score
+  scoreTable.innerHTML = score
 }
 
 function startGame() {
