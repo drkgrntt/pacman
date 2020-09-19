@@ -193,7 +193,7 @@ var randomMovement = function randomMovement(position, direction, objectExist) {
     // Check to see if the ghost can actually move
     var canMove = keys.some(function (key) {
       var direction = _setup.DIRECTIONS[key];
-      return objectExist(position + direction.movement, _setup.OBJECT_TYPE.WALL) || objectExist(position + direction.movement, _setup.OBJECT_TYPE.GHOST);
+      return !objectExist(position + direction.movement, _setup.OBJECT_TYPE.WALL) && !objectExist(position + direction.movement, _setup.OBJECT_TYPE.GHOST);
     });
 
     if (!canMove) {

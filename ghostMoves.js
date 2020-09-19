@@ -16,8 +16,8 @@ export const randomMovement = (position, direction, objectExist) => {
     const canMove = keys.some((key) => {
       const direction = DIRECTIONS[key]
       return (
-        objectExist(position + direction.movement, OBJECT_TYPE.WALL) ||
-        objectExist(position + direction.movement, OBJECT_TYPE.GHOST)
+        !objectExist(position + direction.movement, OBJECT_TYPE.WALL) &&
+        !objectExist(position + direction.movement, OBJECT_TYPE.GHOST)
       )
     })
 
