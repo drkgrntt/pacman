@@ -1,27 +1,27 @@
-export const GRID_SIZE = 20;
-export const CELL_SIZE = 20;
+export const GRID_SIZE = 20
+export const CELL_SIZE = 20
 export const DIRECTIONS = {
   ArrowLeft: {
     code: 37,
     movement: -1,
-    rotation: 180
+    rotation: 180,
   },
   ArrowUp: {
     code: 38,
     movement: -GRID_SIZE,
-    rotation: 270
+    rotation: 270,
   },
   ArrowRight: {
     code: 39,
     movement: 1,
-    rotation: 0
+    rotation: 0,
   },
   ArrowDown: {
     code: 40,
     movement: GRID_SIZE,
-    rotation: 90
-  }
-};
+    rotation: 90,
+  },
+}
 
 export const OBJECT_TYPE = {
   BLANK: 'blank',
@@ -35,8 +35,8 @@ export const OBJECT_TYPE = {
   PACMAN: 'pacman',
   GHOST: 'ghost',
   SCARED: 'scared',
-  GHOSTLAIR: 'lair'
-};
+  GHOSTLAIR: 'lair',
+}
 
 // Lookup array for classes
 export const CLASS_LIST = [
@@ -49,8 +49,8 @@ export const CLASS_LIST = [
   OBJECT_TYPE.CLYDE,
   OBJECT_TYPE.PILL,
   OBJECT_TYPE.PACMAN,
-  OBJECT_TYPE.GHOSTLAIR
-];
+  OBJECT_TYPE.GHOSTLAIR,
+]
 
 // prettier-ignore
 export const LEVEL = [
