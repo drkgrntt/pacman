@@ -1,4 +1,5 @@
 import { LEVEL, OBJECT_TYPE } from './setup'
+import GameBoard from './GameBoard'
 
 // DOM Elements
 const gameGrid = document.querySelector('#game')
@@ -8,6 +9,7 @@ const startButton = document.querySelector('#start-button')
 // Game Constants
 const POWER_PILL_TIME = 10000 // ms
 const GLOBAL_SPEED = 80
+const gameBoard = GameBoard.createGameBoard(gameGrid, LEVEL)
 
 // Initial Setup
 let score = 0
