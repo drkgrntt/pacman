@@ -35,7 +35,7 @@ class Pacman {
     const classesToRemove = [OBJECT_TYPE.PACMAN]
     const classesToAdd = [OBJECT_TYPE.PACMAN]
 
-    return { classesToAdd, clasesToRemove }
+    return { classesToAdd, classesToRemove }
   }
 
   setNewPos(nextMovePos) {
@@ -43,14 +43,17 @@ class Pacman {
   }
 
   handleKeyInput(e, objectExist) {
-    if (e.keyCode <= 37 || e.keyCode >= 40) {
+    if (e.keyCode < 37 || e.keyCode > 40) {
       return
     }
 
     const dir = DIRECTIONS[e.key]
 
     const nextMovePos = this.pos + dir.movement
-    if (objectExist(nextMovePos, OBJECT_TYPE.WALL)) {
+    if (
+      objectExist(nextMovePos, OBJECT_TYPE.WALL) ||
+      objectExist(nextMovePos, OBJECT_TYPE.GHOSTLAIR)
+    ) {
       return
     }
 
